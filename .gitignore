@@ -1,0 +1,3 @@
+test/tprogs/*
+*.a
+*.o
