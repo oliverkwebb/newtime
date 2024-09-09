@@ -89,3 +89,12 @@ test_group () {
 	PROGRAM $1
 	testc "GROUP $1" "" "$(cat test/files/${1}-desired)\n"
 }
+
+PROGRAM date
+testc "date()" "" ""
+
+PROGRAM sleep
+testc "sleepf()" "" ""
+
+PROGRAM wdayof
+testc "wdayof()" "" "4\n5\n6\n5\n4\n"
