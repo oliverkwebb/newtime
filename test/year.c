@@ -4,5 +4,5 @@
 
 int main(int argc, char **argv)
 {
-	for (int i = 1; i < argc; i++) printf("%Lf\n", tocal(strtold(argv[i], 0)).year);
+	for (int i = 1; i < argc; i++) printf("%Lf\n", tocal(strtold(argv[i], 0)).year+1970);
 }

@@ -72,12 +72,11 @@ struct cal tocal(date_t d)
 	c.month = 0;
 	for (; mdays[c.month] <= rd; c.month++) rd -= mdays[c.month];
 
-	if (c.month >= 10) {
-		c.month -= 12;
-		c.year++;
-	}
+	if (c.month < 2) {
+		c.month += 11;
+		c.year--;
+	} else c.month--;
 
-	c.month += 2;
 	c.day = rd + 1;
 	c.year -= 30;
 	
