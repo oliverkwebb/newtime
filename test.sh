@@ -81,20 +81,26 @@ LONGSTRING="$(printf -- "a%150s" potato)"
 
 PROGRAM () {
 	echo "PROGRAM: $1"
-	$CC $CFLAGS -L lib/ test/$1.c -o test/tprogs/$1 -lnewtime
+	$CC $CFLAGS test/$1.c lib/libnewtime.a -o test/tprogs/$1
 	PROG=test/tprogs/$1
 }
 
 test_group () {
 	PROGRAM $1
-	testc "GROUP $1" "" "$(cat test/files/${1}-desired)\n"
+	testc "GROUP $1" "$2" "$(cat test/files/${1}-desired)\n"
+}
+
+test_group_dates () {
+	test_group "$1" "$(cat test/files/dates)"
 }
 
 PROGRAM date
 testc "date()" "" ""
 
+test_group_dates "wdayof"
+test_group_dates "seconds"
+test_group_dates "mins"
+test_group_dates "hour"
+
 PROGRAM sleep
 testc "sleepf()" "" ""
-
-PROGRAM wdayof
-testc "wdayof()" "" "4\n5\n6\n5\n4\n"

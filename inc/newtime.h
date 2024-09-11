@@ -15,7 +15,7 @@ struct cal {
 	unsigned  hour; // 0..23
 	unsigned   day; // 0..30
 	unsigned month; // 0..11
-	long      year; // Since Epoch
+	date_t    year; // Since Epoch
 };
 
 extern struct timespec totimespec(date_t);
