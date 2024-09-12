@@ -101,6 +101,8 @@ test_group_dates "wdayof"
 test_group_dates "seconds"
 test_group_dates "mins"
 test_group_dates "hour"
+test_group_dates "year"
+test_group_dates "month"
 
 PROGRAM sleep
 testc "sleepf()" "" ""
