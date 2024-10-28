@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 		"GMT+4"
 	};
 
-	for (int i = 0; i < argc; i++) {
+	for (int i = 1; i < argc; i++) {
 		date_t arg = strtold(argv[i], NULL);
 		for (int j = 0; j < 7; j++)
 			printf("%Lf, %Lf, %s\n", arg, intz(arg, zones[j]), tznameat(arg, zones[j]));
