@@ -8,12 +8,13 @@ SHUTUP= -Wno-pointer-arith -Wno-discarded-qualifiers
 CFLAGS= -pedantic -Wall -I inc/ -funsigned-char -Os -fdata-sections -ffunction-sections $(MYCFLAGS) $(SHUTUP) -lm
 CSOURCE=$(wildcard src/*.c)
 OBJFILES= $(patsubst src/%.c, obj/%.o, $(CSOURCE)) $(patsubst src/%.S, obj/%.o, $(ASMSOURCE))
+PREFIX=/usr/local
 
 Q=@
 
-.PHONY: all clean test
+.PHONY: all clean test install full_test
 
-all: $(LIB)
+all: $(LIB) $(SOLIB)
 
 $(LIB): $(OBJFILES)
 	rm -f $(OLIB)$(LIB)
@@ -32,7 +33,11 @@ clean:
 test: $(LIB)
 	@./test.sh
 
+full_test:
+	$(MAKE) clean all test
+	$(MAKE) clean all test CC=musl-gcc
+
 install: $(LIB) $(SOLIB)
-	cp inc/newtime.h /usr/include/
-	cp lib/$(LIB) /usr/lib/
-	cp lib/$(SOLIB) /usr/lib
+	cp inc/newtime.h $(PREFIX)/include/
+	cp lib/$(LIB) $(PREFIX)/lib/
+	cp lib/$(SOLIB) $(PREFIX)/lib
