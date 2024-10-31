@@ -1,0 +1,30 @@
+.TH date 3newtime 2024-10-29 "C newtime library" "Library Functions Manual"
+.SH NAME
+tocal, fromcal, wdayof, ydayof \- convert between human-friendly date values and date_t
+.SH LIBRARY
+Newtime library (\fIlibnewtime\fR, \fI-lnewtime\fR)
+.SH SYNOPSIS
+#include <newtime.h>
+
+struct cal {
+        uint32_t nsec; // 0..1E9
+        uint8_t   sec; // 0..60
+        uint8_t   min; // 0..59
+        uint8_t  hour; // 0..23
+        uint8_t   day; // 0..30
+        uint8_t month; // 0..11
+        date_t   year;
+
+};
+
+struct cal tocal(date_t \fId\fR);
+
+date_t fromcal(struct cal \fIcal\fR);
+
+int wdayof(date_t \fId\fR);
+
+int ydayof(date_t \fId\fR);
+.SH DESCRIPTION
+These functions handle human-friendly "broken down time" values.
+.SH SEE ALSO
+tm(3type), gmtime(3), timegm(3)

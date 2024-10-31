@@ -1,0 +1,15 @@
+.TH date 3newtime 2024-10-29 "C newtime library" "Library Functions Manual"
+.SH NAME
+totimespec, fromtimespec \- Convert between struct timespec and date_t
+.SH LIBRARY
+Newtime library (\fIlibnewtime\fR, \fI-lnewtime\fR)
+.SH SYNOPSIS
+#include <newtime.h>
+
+struct timespec totimespec(date_t \fId\fR);
+
+date_t fromtimespec(struct timespec \fId\fR);
+.SH DESCRIPTION
+These functions convert between the timespec struct and date_t.
+.SH ERRORS
+EOVERFLOW \- The result can not be represented within the bounds of \fIstruct timespec\fR

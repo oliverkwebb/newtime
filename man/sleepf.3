@@ -1,0 +1,16 @@
+.TH date 3newtime 2024-10-29 "C newtime library" "Library Functions Manual"
+.SH NAME
+sleepf \- Sleep for a floating point number of seconds.
+.SH LIBRARY
+Newtime library (\fIlibnewtime\fR, \fI-lnewtime\fR)
+.SH SYNOPSIS
+#include <newtime.h>
+
+date_t sleepf(date_t \fItime\fR);
+.SH DESCRIPTION
+This function sleeps for \fItime\fR number of seconds. The duration specified is floating point.
+.SH REUTRN VALUE
+This function returns the amount of time left to sleep, if the sleep is uninterrupted, this function
+returns 0.
+.SH SEE ALSO
+sleep(3), usleep(3), nanosleep(3)

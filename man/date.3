@@ -1,0 +1,16 @@
+.TH date 3newtime 2024-10-29 "C newtime library" "Library Functions Manual"
+.SH NAME
+date \- get the current fractional time
+.SH LIBRARY
+Newtime library (\fIlibnewtime\fR, \fI-lnewtime\fR)
+.SH SYNOPSIS
+#include <newtime.h>
+
+date_t date(void);
+.SH DESCRIPTION
+This function returns the number of seconds since the unix epoch with nanosecond
+precision in long double from.
+.SH REUTRN VALUE
+This function always returns the current time with nanosecond level precision.
+.SH SEE ALSO
+time(3), clock_gettime(3)

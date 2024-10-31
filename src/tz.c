@@ -1,4 +1,3 @@
-#define /*_NOT*/_GNU_SOURCE // *sigh*
 #include <newtime.h>
 #include <stdlib.h>
 #include <string.h>

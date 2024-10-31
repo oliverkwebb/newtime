@@ -31,6 +31,7 @@ extern date_t          intz(date_t d, char *tz); // return d+tzoffat(d, tz);
 extern const char     *mytz(void);
 extern date_t        inmytz(date_t d);           // return intz(d, mytz());
 
+extern void printfdate(const char *fmt, date_t d, const char *zone);
 /*
 extern char *tmpdatestr(const char *fmt, date_t d, char *tz); // Realloc on the same array
 extern char  *asdatestr(const char *fmt, date_t d, chat *tz); // Malloc on a different array
