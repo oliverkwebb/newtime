@@ -3,22 +3,58 @@
 #include <string.h>
 #include <stdio.h>
 
-void printfdate(const char *fmt, date_t d, const char *zone)
+static void writedatestr(int (*submit)(const char *fmt, ...), const char *fmt, date_t d, const char *zone)
 {
 	date_t zone_corr = intz(d, zone);
 	struct cal c = tocal(zone_corr);
 	for (int i = 0; i < strlen(fmt); i++) {
-		if (fmt[i] != '%') putchar(fmt[i]);
+		if (fmt[i] != '%') submit("%c", fmt[i]);
 		else switch (fmt[++i]) {
 		case  '%': // FALLTHROUGH
-		case '\0': putchar('%'); break;
+		case '\0': submit("%%"); break;
 
-		case 'm': printf("%d", c.min); break;
-		case 'h': printf("%d", c.hour); break;
-		case 'y': printf("%.0Lf", c.year+1970); break;
-		case 's': printf("%d", c.sec); break;
-		case 'w': printf("%s", nl_langinfo(ABDAY_1+wdayof(zone_corr))); break;
-		case 'z': printf("%s", tznameat(d, zone)); break;
+		case 'h': submit("%02u", c.hour); break;
+		case 'm': submit("%02u", c.min); break;
+		case 's': submit("%02u", c.sec); break;
+
+		case 'w': submit("%s", nl_langinfo(DAY_1+wdayof(zone_corr))); break;
+		case 'd': submit("%02u", c.day); break;
+		case 'M': submit("%s", nl_langinfo(MON_1+c.month)); break;
+		case 'y': submit("%.0Lf", c.year+1970); break;
+		case 'z': submit("%s", tznameat(d, zone)); break;
+		default:
+			if (!strncmp(fmt+i, "Ns", 2))
+				submit("%u", c.nsec);
+			else if (!strncmp(fmt+i, "Us", 2))
+				submit("%u", c.nsec/1000);
+			else if (!strncmp(fmt+i, "Fs", 2))
+				submit("%03u", c.nsec/1000000);
+			else if (!strncmp(fmt+i, "Es", 2))
+				submit("%.0Lf", d);
+			else if (!strncmp(fmt+i, "nw", 2))
+				submit("%02u", wdayof(zone_corr));
+			else if (!strncmp(fmt+i, "aw", 2))
+				submit("%s", nl_langinfo(ABDAY_1+wdayof(zone_corr)));
+			else if (!strncmp(fmt+i, "nM", 2))
+				submit("%02u", c.month+1);
+			else if (!strncmp(fmt+i, "aM", 2))
+				submit("%s", nl_langinfo(ABMON_1+c.month));
+			else if (!strncmp(fmt+i, "Dy", 2))
+				submit("%u", wdayof(zone_corr));
+			else if (!strncmp(fmt+i, "Cy", 2))
+				submit("%.0Lf", c.year/100);
+			else if (!strncmp(fmt+i, "nz", 2))
+				submit("%s", zone);
+			else if (!strncmp(fmt+i, "oz", 2))
+				submit("%d", tzoffat(d, zone));
+			else break;
+			i++;
+			break;
 		}
 	}
+}
+
+void printfdate(const char * fmt, date_t d, const char *zone)
+{
+	writedatestr(printf, fmt, d, zone);
 }

@@ -16,7 +16,8 @@ wday #    - nw
 wday abbr - aw
 wday full - w
 
-mday       - dM
+mday       - d
+
 month #    - nM
 month abbr - aM
 month full - M

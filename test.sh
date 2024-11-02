@@ -104,6 +104,7 @@ test_group_dates "hour"
 test_group_dates "year"
 test_group_dates "month"
 test_group "fromcal"
+test_group "datestr"
 
 test_group_dates "tz"
 
