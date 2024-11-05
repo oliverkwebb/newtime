@@ -1,36 +1,5 @@
-% - %
-
-nanos        - Ns
-micros       - Us
-millis       - Fs
-epochseconds - Es
-seconds      - s
-
-minutes - m
-
 12-hours - ch
 AM/PM    - ih
-hours    - h
-
-wday #    - nw
-wday abbr - aw
-wday full - w
-
-mday       - d
-
-month #    - nM
-month abbr - aM
-month full - M
-
-yday #    - Dy
-quarter   - Qy
-yweek #   - Wy
-century   - Cy
 year 2#   - Sy
-year full - y
-
-zone name            - nz
-zone offset #        - oz
 zone off fmt +-hhmm  - fz
 zone off fmt +-hh:mm - :z
-zone abbr            - z
