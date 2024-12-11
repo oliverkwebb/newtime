@@ -3,6 +3,14 @@
 #include <string.h>
 #include <stdio.h>
 
+/* TODO:
+12-hours - ch
+AM/PM    - ih
+year 2#   - Sy
+zone off fmt +-hhmm  - fz
+zone off fmt +-hh:mm - :z
+*/
+
 static void writedatestr(int (*submit)(const char *fmt, ...), const char *fmt, date_t d, const char *zone)
 {
 	date_t zone_corr = intz(d, zone);
