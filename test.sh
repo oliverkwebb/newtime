@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 # Simple test harness infrastructure
 # Copyright 2005 by Rob Landley
 # The following environment varAiables enable optional behavior in "testc":

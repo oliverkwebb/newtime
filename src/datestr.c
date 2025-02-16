@@ -4,9 +4,6 @@
 #include <stdio.h>
 
 /* TODO:
-12-hours - ch
-AM/PM    - ih
-year 2#   - Sy
 zone off fmt +-hhmm  - fz
 zone off fmt +-hh:mm - :z
 */
@@ -35,6 +32,10 @@ static void writedatestr(int (*submit)(const char *fmt, ...), const char *fmt, d
 				submit("%u", c.nsec);
 			else if (!strncmp(fmt+i, "Us", 2))
 				submit("%u", c.nsec/1000);
+			else if (!strncmp(fmt+i, "ch", 2))
+				submit("%u", c.hour % 12);
+			else if (!strncmp(fmt+i, "ih", 2))
+				submit("%s", c.hour % 12 ? "AM" : "PM");
 			else if (!strncmp(fmt+i, "Fs", 2))
 				submit("%03u", c.nsec/1000000);
 			else if (!strncmp(fmt+i, "Es", 2))
@@ -50,7 +51,9 @@ static void writedatestr(int (*submit)(const char *fmt, ...), const char *fmt, d
 			else if (!strncmp(fmt+i, "Dy", 2))
 				submit("%u", wdayof(zone_corr));
 			else if (!strncmp(fmt+i, "Cy", 2))
-				submit("%.0Lf", c.year/100);
+				submit("%.0Lf", (c.year)/100);
+			//else if (!strncmp(fmt+i, "Sy", 2))
+			//	submit("%.0Lf", (c.year+1970)(long)%100);
 			else if (!strncmp(fmt+i, "nz", 2))
 				submit("%s", zone);
 			else if (!strncmp(fmt+i, "oz", 2))
@@ -66,3 +69,17 @@ void printfdate(const char * fmt, date_t d, const char *zone)
 {
 	writedatestr(printf, fmt, d, zone);
 }
+
+// TODO
+/*
+date_t readdate(const char *fmt, char *buf, date_t base, char *tz)
+{
+	struct cal cbase = tocal(intz(base, tz));
+
+	for (size_t i = 0; i < strlen(fmt); i++) {
+		size_t bufidx = 0;
+	}
+	
+	return fromcal(cbase);
+}
+*/
